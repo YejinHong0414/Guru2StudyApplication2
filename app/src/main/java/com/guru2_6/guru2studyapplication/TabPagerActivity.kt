@@ -8,14 +8,17 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_tab_pager.*
 
+// 어플리케이션의 메인액티비티
 class TabPagerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab_pager2)
 
-        tab_layout.addTab(tab_layout.newTab().setText("ONE"))
+        tab_layout.addTab(tab_layout.newTab().setText("ONE")) // 탭의 첫번째 화면 : 메모장 (달력)
         tab_layout.addTab(tab_layout.newTab().setText("TWO"))
         tab_layout.addTab(tab_layout.newTab().setText("THREE"))
+        tab_layout.addTab(tab_layout.newTab().setText("FOUR"))
+        tab_layout.addTab(tab_layout.newTab().setText("타이머"))
 
         val pagerAdapter = FragmentPagerAdapter(supportFragmentManager, 3)
         view_pager.adapter = pagerAdapter
@@ -44,6 +47,7 @@ class FragmentPagerAdapter(
     val tabCount: Int
 ): FragmentStatePagerAdapter(fragmentManager){
     override fun getItem(position: Int): Fragment {
+        // 여기에 각자 기능 Fragment들을 넣으시면 됩니다!:)
         when(position){
             0 -> {
                 return Fragment1()
@@ -53,6 +57,12 @@ class FragmentPagerAdapter(
             }
             2 -> {
                 return Fragment3()
+            }
+            3 -> {
+                return Fragment4()
+            }
+            4 -> {
+                return TimerFragment()
             }
             else -> return Fragment1()
         }
