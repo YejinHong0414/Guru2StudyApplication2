@@ -1,25 +1,47 @@
 package com.guru2_6.guru2studyapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.SeekBar
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_study_timer.*
 import kotlin.concurrent.timer
+open class Handler
 
-class StudyTimerActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+class Fragment1 : Fragment(){
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d("life_cycle","F onCreateView")
+        // fragment가 인터페이스를 처음 그릴때 호출된다
+        // inflater -> 뷰를 그려주는 역할
+        // container -> 부모 뷰
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_study_timer)
 
-        val seekbar : SeekBar = findViewById(R.id.seekBar)
-        val time : TextView = findViewById(R.id.time)
+        return inflater.inflate(R.layout.activity_study_timer, container, false)
+
+
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d("life_cycle","F onViewCreated")
+        super.onViewCreated(view, savedInstanceState)
         var timeTick = 0
         var minute = 0
         var second = 0
         val initialTextViewTranslationY = time.translationY
 
-        seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+        // Activity의 Oncreate에서 했던 작업을 여지에서 한다
+//        pass.setOnClickListener {
+//            dataPassListener.onDataPass("Good Bye")
+//        }
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 timeTick = progress
                 time.text = String.format("%02d : %02d", timeTick/60, timeTick%60)
@@ -49,7 +71,7 @@ class StudyTimerActivity : AppCompatActivity() {
             minute = timeTick / 60
             second = timeTick % 60
             timer(period = 1000, initialDelay = 1000){
-                runOnUiThread {
+                activity!!.runOnUiThread {
                     time.text = String.format("%02d : %02d", minute, second)
                 }
                 if(second == 0 && minute == 0){
@@ -65,8 +87,50 @@ class StudyTimerActivity : AppCompatActivity() {
             }
         }
         reset.setOnClickListener { view ->
-            seekbar.progress = 0
+            seekBar.progress = 0
 
         }
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        Log.d("life_cycle","F onActivityCreated")
+
+        val data = arguments?.getString("hello")
+        //Log.d("data", data)
+
+        super.onActivityCreated(savedInstanceState)
+    }
+
+    override fun onStart() {
+        Log.d("life_cycle","F onStart")
+        super.onStart()
+    }
+
+    override fun onResume() {
+        Log.d("life_cycle","F onResume")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Log.d("life_cycle","F onPause")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Log.d("life_cycle","F onStop")
+        super.onStop()
+    }
+
+    override fun onDestroyView() {
+        Log.d("life_cycle","F onDestroyView")
+        super.onDestroyView()
+    }
+
+    override fun onDetach() {
+        Log.d("life_cycle","F onDetach")
+        super.onDetach()
+    }
+
+
+
 }
