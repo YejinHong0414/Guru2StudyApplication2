@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.swudiary.databinding.ActivityMainBinding
 import com.example.swudiary.databinding.ItemTodoBinding
 
-class Todo_List : AppCompatActivity() {
+class Todo_List : Fragment() {
     private lateinit var binding: ActivityMainBinding
 
     private val data = arrayListOf<Todo>()
