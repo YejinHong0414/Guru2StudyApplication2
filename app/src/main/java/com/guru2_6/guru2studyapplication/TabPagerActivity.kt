@@ -53,7 +53,7 @@ class FragmentPagerAdapter(
                 return Fragment1()
             }
             1 -> {
-                return Fragment2()
+                return Todo_List()
             }
             2 -> {
                 return Fragment3()
