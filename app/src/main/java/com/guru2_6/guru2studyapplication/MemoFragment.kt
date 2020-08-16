@@ -62,6 +62,7 @@ class MemoFragment : Fragment(){
     }
     fun checkedDay(cYear: Int, cMonth: Int, cDay: Int) {
         fname = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
+
 // 저장할 파일 이름 설정. Ex) 2019-01-20.txt
         var fis: FileInputStream? = null // FileStream fis 변수 설정
 
@@ -121,36 +122,39 @@ class MemoFragment : Fragment(){
         }
     }
 
-    @SuppressLint("WrongConstant")
-    fun saveDiary(readyDay: String) {
-        var fos: FileOutputStream? = null
 
-        try {
-            fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
-            var content: String = contextEditText.getText().toString()
-            fos.write(content.toByteArray())
-            fos.close()
 
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+}
 
+
+@SuppressLint("WrongConstant")
+fun saveDiary(readyDay: String) {
+    var fos: FileOutputStream? = null
+
+    try {
+        fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
+        var content: String = contextEditText.getText().toString()
+        fos.write(content.toByteArray())
+        fos.close()
+
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
+}
 
-    @SuppressLint("WrongConstant")
-    fun removeDiary(readyDay: String) {
-        var fos: FileOutputStream? = null
 
-        try {
-            fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
-            var content: String = ""
-            fos.write(content.toByteArray())
-            fos.close()
+@SuppressLint("WrongConstant")
+fun removeDiary(readyDay: String) {
+    var fos: FileOutputStream? = null
 
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+    try {
+        fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
+        var content: String = ""
+        fos.write(content.toByteArray())
+        fos.close()
 
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 
 }
