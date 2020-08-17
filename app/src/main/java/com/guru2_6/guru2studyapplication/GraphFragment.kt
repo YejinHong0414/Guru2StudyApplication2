@@ -50,9 +50,9 @@ class GraphFragment : Fragment() {
         Log.d("life_cycle", "F onViewCreated")
         super.onViewCreated(view, savedInstanceState)
 
-        val linechart: LineChart = getView()!!.findViewById(R.id.Linechart)
+        val linechart: LineChart = requireView()!!.findViewById(R.id.Linechart) //getView
         val entries: ArrayList<Entry> = ArrayList()
-        val stickylabel: TextView = getView()!!.findViewById(R.id.stickyLabel)
+        val stickylabel: TextView = requireView()!!.findViewById(R.id.stickyLabel)
 
         entries.add(Entry(1f, 0F))
         entries.add(Entry(2f, 2f))
@@ -117,7 +117,7 @@ class GraphFragment : Fragment() {
         linechart.axisLeft.xOffset = 15f
 
         val marker: ExampleMarker =
-            ExampleMarker(activity!!.applicationContext, R.layout.activity_markerview)
+            ExampleMarker(requireActivity().applicationContext, R.layout.activity_markerview) // activity!!
         marker.chartView = linechart
         linechart.marker = marker
 

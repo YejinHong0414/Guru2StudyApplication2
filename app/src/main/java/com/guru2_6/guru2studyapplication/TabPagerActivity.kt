@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.ateots.guruproject.GraphFragment
+import com.example.myapplication.StopWatchFragment
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_tab_pager.*
 
@@ -15,9 +17,9 @@ class TabPagerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tab_pager2)
 
         tab_layout.addTab(tab_layout.newTab().setText("ONE")) // 탭의 첫번째 화면 : 메모장 (달력)
-        tab_layout.addTab(tab_layout.newTab().setText("TWO"))
-        tab_layout.addTab(tab_layout.newTab().setText("THREE"))
-        tab_layout.addTab(tab_layout.newTab().setText("FOUR"))
+        tab_layout.addTab(tab_layout.newTab().setText("할일 리스트"))
+        tab_layout.addTab(tab_layout.newTab().setText("통계"))
+        tab_layout.addTab(tab_layout.newTab().setText("스탑워치"))
         tab_layout.addTab(tab_layout.newTab().setText("타이머"))
 
         val pagerAdapter = FragmentPagerAdapter(supportFragmentManager, 3)
@@ -56,10 +58,10 @@ class FragmentPagerAdapter(
                 return Todo_List()
             }
             2 -> {
-                return Fragment3()
+                return GraphFragment()
             }
             3 -> {
-                return Fragment4()
+                return StopWatchFragment()
             }
             4 -> {
                 return TimerFragment()
