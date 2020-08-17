@@ -3,11 +3,11 @@ package com.guru2_6.guru2studyapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main4.*
+import kotlinx.android.synthetic.main.activity_study__stop_watch_.*
 import java.util.*
 import kotlin.concurrent.timer
 
-class MainActivity2 : AppCompatActivity() {
+class Study_StopWatch_Activity : AppCompatActivity() {
 
     private var time = 0
     private var timerTask: Timer? = null      // null을 허용
@@ -16,7 +16,7 @@ class MainActivity2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main4)
+        setContentView(R.layout.activity_study__stop_watch_)
 
         btn_start.setOnClickListener {
             isRunning = !isRunning
