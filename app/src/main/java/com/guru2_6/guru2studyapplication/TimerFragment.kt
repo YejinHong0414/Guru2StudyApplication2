@@ -37,7 +37,7 @@ class TimerFragment : Fragment(){
         var second = 0
         val initialTextViewTranslationY = time.translationY
 
-        // Activity의 Oncreate에서 했던 작업을 여지에서 한다
+        // Activity의 Oncreate에서 했던 작업을 여기에서 한다
 //        pass.setOnClickListener {
 //            dataPassListener.onDataPass("Good Bye")
 //        }
