@@ -21,7 +21,6 @@ class MemoFragment : Fragment() {
 
 
     ): View? {
-        return inflater.inflate(R.layout.activity_memo, container, false)
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
 // 달력 날짜가 선택되면
@@ -54,6 +53,9 @@ class MemoFragment : Fragment() {
             contextEditText.visibility = View.INVISIBLE
             textView2.visibility = View.VISIBLE
         }
+
+        return inflater.inflate(R.layout.activity_memo, container, false)
+
     }
 
     // fragment가 인터페이스를 처음 그릴때 호출된다
@@ -63,101 +65,104 @@ class MemoFragment : Fragment() {
     var fname: String = ""
     var str: String = ""
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-
-    fun checkedDay(cYear: Int, cMonth: Int, cDay: Int) {
-        fname = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
+        fun checkedDay(cYear: Int, cMonth: Int, cDay: Int) {
+            fname = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
 
 // 저장할 파일 이름 설정. Ex) 2019-01-20.txt
-        var fis: FileInputStream? = null // FileStream fis 변수 설정
+            var fis: FileInputStream? = null // FileStream fis 변수 설정
 
-        try {
-            fis = openFileInput(fname) // fname 파일 오픈!!
+            try {
+                fis = openFileInput(fname) // fname 파일 오픈!!
 
-            val fileData = ByteArray(fis.available()) // fileData에 파이트 형식
+                val fileData = ByteArray(fis.available()) // fileData에 파이트 형식
 //으로 저장
-            fis.read(fileData) // fileData를 읽음
-            fis.close()
+                fis.read(fileData) // fileData를 읽음
+                fis.close()
 
-            str = String(fileData) // str 변수에 fileData를 저장
+                str = String(fileData) // str 변수에 fileData를 저장
 
-            contextEditText.visibility = View.INVISIBLE
-            textView2.visibility = View.VISIBLE
-            textView2.text = "${str}" // textView에 str 출력
+                contextEditText.visibility = View.INVISIBLE
+                textView2.visibility = View.VISIBLE
+                textView2.text = "${str}" // textView에 str 출력
 
-            save_Btn.visibility = View.INVISIBLE
-            cha_Btn.visibility = View.VISIBLE
-            del_Btn.visibility = View.VISIBLE
+                save_Btn.visibility = View.INVISIBLE
+                cha_Btn.visibility = View.VISIBLE
+                del_Btn.visibility = View.VISIBLE
 
-            cha_Btn.setOnClickListener { // 수정 버튼을 누를 시
-                contextEditText.visibility = View.VISIBLE
-                textView2.visibility = View.INVISIBLE
-                contextEditText.setText(str) // editText에 textView에 저장된
+                cha_Btn.setOnClickListener { // 수정 버튼을 누를 시
+                    contextEditText.visibility = View.VISIBLE
+                    textView2.visibility = View.INVISIBLE
+                    contextEditText.setText(str) // editText에 textView에 저장된
 // 내용을 출력
-                save_Btn.visibility = View.VISIBLE
-                cha_Btn.visibility = View.INVISIBLE
-                del_Btn.visibility = View.INVISIBLE
-                textView2.text = "${contextEditText.getText()}"
+                    save_Btn.visibility = View.VISIBLE
+                    cha_Btn.visibility = View.INVISIBLE
+                    del_Btn.visibility = View.INVISIBLE
+                    textView2.text = "${contextEditText.getText()}"
+                }
+
+                del_Btn.setOnClickListener {
+
+                    textView2.visibility = View.INVISIBLE
+                    contextEditText.setText("")
+                    contextEditText.visibility = View.VISIBLE
+                    save_Btn.visibility = View.VISIBLE
+                    cha_Btn.visibility = View.INVISIBLE
+                    del_Btn.visibility = View.INVISIBLE
+                    removeDiary(fname)
+
+                    //toast(fname + "데이터를 삭제했습니다.")
+                }
+
+                if (textView2.getText() == "") {
+                    textView2.visibility = View.INVISIBLE
+                    diaryTextView.visibility = View.VISIBLE
+                    save_Btn.visibility = View.VISIBLE
+                    cha_Btn.visibility = View.INVISIBLE
+                    del_Btn.visibility = View.INVISIBLE
+                    contextEditText.visibility = View.VISIBLE
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-
-            del_Btn.setOnClickListener {
-
-                textView2.visibility = View.INVISIBLE
-                contextEditText.setText("")
-                contextEditText.visibility = View.VISIBLE
-                save_Btn.visibility = View.VISIBLE
-                cha_Btn.visibility = View.INVISIBLE
-                del_Btn.visibility = View.INVISIBLE
-                removeDiary(fname)
-
-                //toast(fname + "데이터를 삭제했습니다.")
-            }
-
-            if (textView2.getText() == "") {
-                textView2.visibility = View.INVISIBLE
-                diaryTextView.visibility = View.VISIBLE
-                save_Btn.visibility = View.VISIBLE
-                cha_Btn.visibility = View.INVISIBLE
-                del_Btn.visibility = View.INVISIBLE
-                contextEditText.visibility = View.VISIBLE
-            }
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    @SuppressLint("WrongConstant")
-    fun saveDiary(readyDay: String) {
-        var fos: FileOutputStream? = null
-
-        try {
-            fos = openFileOutput(readyDay, MODE_NO_LOCALIZED_COLLATORS)
-            var content: String = contextEditText.getText().toString()
-            fos.write(content.toByteArray())
-            fos.close()
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-
-    @SuppressLint("WrongConstant")
-    fun removeDiary(readyDay: String) {
-        var fos: FileOutputStream? = null
-
-        try {
-            fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
-            var content: String = ""
-            fos.write(content.toByteArray())
-            fos.close()
-
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
 
+        @SuppressLint("WrongConstant")
+        fun saveDiary(readyDay: String) {
+            var fos: FileOutputStream? = null
+
+            try {
+                fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
+                var content: String = contextEditText.getText().toString()
+                fos.write(content.toByteArray())
+                fos.close()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        @SuppressLint("WrongConstant")
+        fun removeDiary(readyDay: String) {
+            var fos: FileOutputStream? = null
+
+            try {
+                fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
+                var content: String = ""
+                fos.write(content.toByteArray())
+                fos.close()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }
+
     }
+
 
 }
 
