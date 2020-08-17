@@ -19,6 +19,7 @@ class MemoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
 
+
     ): View? {
         return inflater.inflate(R.layout.activity_memo, container, false)
 
