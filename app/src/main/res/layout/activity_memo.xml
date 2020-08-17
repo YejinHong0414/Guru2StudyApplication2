@@ -65,6 +65,7 @@
         android:layout_marginRight="8dp"
         android:backgroundTint="#9A9CEA"
         android:text="저장"
+        android:textColor="#ffffff"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +73,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:background="#A2B9EE"
+        android:background="#ADEEE2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -113,6 +114,7 @@
         android:layout_marginRight="8dp"
         android:backgroundTint="#9A9CEA"
         android:text="수정"
+        android:textColor="#ffffff"
         android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/save_Btn"
         app:layout_constraintEnd_toStartOf="@+id/del_Btn"
@@ -126,6 +128,7 @@
         android:layout_marginRight="8dp"
         android:backgroundTint="#9A9CEA"
         android:text="삭제"
+        android:textColor="#ffffff"
         android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/cha_Btn"
         app:layout_constraintEnd_toEndOf="@+id/save_Btn" />
