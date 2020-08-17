@@ -10,7 +10,7 @@ import kotlin.concurrent.timer
 class StudyTimerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_study_timer)
+         setContentView(R.layout.activity_study_timer)
 
         val seekbar : SeekBar = findViewById(R.id.seekBar)
         val time : TextView = findViewById(R.id.time)
