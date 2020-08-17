@@ -12,17 +12,15 @@ import kotlinx.android.synthetic.main.activity_memo.*
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-class MemoFragment : Fragment(){
-
-    var fname: String = ""
-    var str: String = ""
+class MemoFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
-        Log.d("life_cycle","F onCreateView")
+        return inflater.inflate(R.layout.activity_memo, container, false)
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
 // 달력 날짜가 선택되면
@@ -55,11 +53,17 @@ class MemoFragment : Fragment(){
             contextEditText.visibility = View.INVISIBLE
             textView2.visibility = View.VISIBLE
         }
-        // fragment가 인터페이스를 처음 그릴때 호출된다
-        // inflater -> 뷰를 그려주는 역할
-        // container -> 부모 뷰
-        return inflater.inflate(R.layout.activity_memo, container, false)
     }
+
+    // fragment가 인터페이스를 처음 그릴때 호출된다
+    // inflater -> 뷰를 그려주는 역할
+    // container -> 부모 뷰
+
+    var fname: String = ""
+    var str: String = ""
+
+
+
     fun checkedDay(cYear: Int, cMonth: Int, cDay: Int) {
         fname = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
 
@@ -122,39 +126,38 @@ class MemoFragment : Fragment(){
         }
     }
 
+    @SuppressLint("WrongConstant")
+    fun saveDiary(readyDay: String) {
+        var fos: FileOutputStream? = null
 
+        try {
+            fos = openFileOutput(readyDay, MODE_NO_LOCALIZED_COLLATORS)
+            var content: String = contextEditText.getText().toString()
+            fos.write(content.toByteArray())
+            fos.close()
 
-}
-
-
-@SuppressLint("WrongConstant")
-fun saveDiary(readyDay: String) {
-    var fos: FileOutputStream? = null
-
-    try {
-        fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
-        var content: String = contextEditText.getText().toString()
-        fos.write(content.toByteArray())
-        fos.close()
-
-    } catch (e: Exception) {
-        e.printStackTrace()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
-}
 
 
-@SuppressLint("WrongConstant")
-fun removeDiary(readyDay: String) {
-    var fos: FileOutputStream? = null
+    @SuppressLint("WrongConstant")
+    fun removeDiary(readyDay: String) {
+        var fos: FileOutputStream? = null
 
-    try {
-        fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
-        var content: String = ""
-        fos.write(content.toByteArray())
-        fos.close()
+        try {
+            fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
+            var content: String = ""
+            fos.write(content.toByteArray())
+            fos.close()
 
-    } catch (e: Exception) {
-        e.printStackTrace()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
 }
+
+
