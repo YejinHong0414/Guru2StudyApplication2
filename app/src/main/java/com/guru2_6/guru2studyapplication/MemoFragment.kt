@@ -77,7 +77,7 @@ class MemoFragment : Fragment() {
         var fis: FileInputStream? = null // FileStream fis 변수 설정
 
         try {
-            fis = openFileInput(fname) // fname 파일 열기
+            fis = activity?.openFileInput(fname) // fname 파일 열기
             val fileData = fis?.available()?.let { ByteArray(it) } //바이트 형식으로 저장
             fis?.read(fileData) // fileData를 읽음
             fis?.close()
@@ -129,10 +129,11 @@ class MemoFragment : Fragment() {
     }
 
 
+    @SuppressLint("WrongConstant")
     private fun saveDiary(readyDay: String) {
         var fos: FileOutputStream? = null
         try {
-            fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
+            fos = activity?.openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
             var content: String = contextEditText.getText().toString()
             fos?.write(content.toByteArray())
             fos?.close()
@@ -146,7 +147,7 @@ class MemoFragment : Fragment() {
     fun removeDiary(readyDay: String) {
         var fos: FileOutputStream? = null
         try {
-            fos = openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
+            fos = activity?.openFileOutput(readyDay, AppCompatActivity.MODE_NO_LOCALIZED_COLLATORS)
             var content: String = ""
             fos?.write(content.toByteArray())
             fos?.close()
