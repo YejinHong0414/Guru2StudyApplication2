@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_memo.*
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.io.OutputStream
 
 class MemoFragment : Fragment() {
 
@@ -75,6 +76,7 @@ class MemoFragment : Fragment() {
 
 // 저장할 파일 이름 설정. Ex) 2019-01-20.txt
         var fis: FileInputStream? = null // FileStream fis 변수 설정
+
 
         try {
             fis = activity?.openFileInput(fname) // fname 파일 열기
