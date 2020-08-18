@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_memo.*
+import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
@@ -76,10 +77,9 @@ class MemoFragment : Fragment() {
         var fis: FileInputStream? = null // FileStream fis 변수 설정
 
         try {
-            fis = openFileInput(fname) // fname 파일 오픈!!
+            fis = openFileInput(fname) // fname 파일 열기
 
-            val fileData = ByteArray(fis!!.available()) // fileData에 파이트 형식
-//으로 저장
+            val fileData = ByteArray(fis!!.available()) //바이트 형식으로 저장
             fis?.read(fileData) // fileData를 읽음
             fis?.close()
 
@@ -96,8 +96,7 @@ class MemoFragment : Fragment() {
             cha_Btn.setOnClickListener { // 수정 버튼을 누를 시
                 contextEditText.visibility = View.VISIBLE
                 textView2.visibility = View.INVISIBLE
-                contextEditText.setText(str) // editText에 textView에 저장된
-// 내용을 출력
+                contextEditText.setText(str) // editText에 textView에 저장된 내용 출력
                 save_Btn.visibility = View.VISIBLE
                 cha_Btn.visibility = View.INVISIBLE
                 del_Btn.visibility = View.INVISIBLE
