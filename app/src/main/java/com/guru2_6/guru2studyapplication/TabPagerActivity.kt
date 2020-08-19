@@ -8,13 +8,21 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.ateots.guruproject.GraphFragment
 import com.example.myapplication.StopWatchFragment
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_tab_pager.*
+import kotlinx.android.synthetic.main.activity_tab_pager2.*
 
 // 어플리케이션의 메인액티비티
 class TabPagerActivity : AppCompatActivity() {
+    val RC_SIGN_IN = 1000
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab_pager2)
+        
+        var auth: FirebaseAuth = Firebase.auth
+        if(auth.currentUser == null)
+        {
+            login()
+        }
 
         tab_layout.addTab(tab_layout.newTab().setText("메모장")) // 탭의 첫번째 화면 : 메모장 (달력)
         tab_layout.addTab(tab_layout.newTab().setText("할 일"))
@@ -41,6 +49,60 @@ class TabPagerActivity : AppCompatActivity() {
         })
         view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
         // -> 페이저가 이동했을때 탭을 이동시키는 코드
+    }
+    
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_SIGN_IN) {
+            val response = IdpResponse.fromResultIntent(data)
+
+            if (resultCode == Activity.RESULT_OK) {
+                // Successfully signed in
+                val user = FirebaseAuth.getInstance().currentUser
+                // ...
+            } else {
+                finish()
+            }
+        }
+    }
+
+    fun login()
+    {
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build())
+
+        startActivityForResult(
+            AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .build(),
+            RC_SIGN_IN)
+    }
+
+    fun logout()
+    {
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener {
+                login()
+            }
+
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater : MenuInflater = menuInflater
+        inflater.inflate(R.menu.mainmenu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_log_out -> {
+                logout()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
 
