@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.ateots.guruproject.GraphFragment
 import com.example.myapplication.StopWatchFragment
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_tab_pager.*
+import kotlinx.android.synthetic.main.activity_tab_pager2.*
 
 // 어플리케이션의 메인액티비티
 class TabPagerActivity : AppCompatActivity() {
