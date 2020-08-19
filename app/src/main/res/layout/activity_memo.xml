@@ -73,13 +73,12 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:background="#ADEEE2"
+        android:background="#A2DCEE"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:textColorHighlight="#ADEEE2"
-        android:textColorLink="#ADEEE2"
+
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/contextEditText"
         app:layout_constraintEnd_toEndOf="parent"
