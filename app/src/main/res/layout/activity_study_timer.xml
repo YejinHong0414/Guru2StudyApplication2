@@ -11,9 +11,13 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#AEB9EE"
+        android:background="#9A9CEA"
         android:gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Timer"
+        android:textStyle=""
         android:textColor="#ffffff"
         android:textSize="30dp"
         app:layout_constraintHeight_percent="0.1"
@@ -25,7 +29,7 @@
         android:layout_height="300dp"
         android:gravity="center"
         android:text="00 : 00"
-        android:textColor="#434343"
+        android:textColor="#9A9CEA"
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/seekBar"
         app:layout_constraintTop_toBottomOf="@+id/text" />
@@ -46,9 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="96dp"
-        android:backgroundTint="#9A9CEA"
+        android:background="@drawable/button"
         android:text="START"
-        android:textColor="#ffffff"
+        android:textColor="#9A9CEA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -58,9 +62,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
         android:layout_marginBottom="96dp"
-        android:backgroundTint="#9A9CEA"
+        android:background="@drawable/button"
         android:text="STOP"
-        android:textColor="#ffffff"
+        android:textColor="#9A9CEA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/start" />
 
@@ -70,9 +74,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="96dp"
-        android:backgroundTint="#9A9CEA"
+        android:background="@drawable/button"
         android:text="RESET"
-        android:textColor="#ffffff"
+        android:textColor="#9A9CEA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

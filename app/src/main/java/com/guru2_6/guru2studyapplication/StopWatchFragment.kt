@@ -1,5 +1,4 @@
 //package com.guru2_6.guru2studyapplication
-
 package com.example.myapplication // <- 이 부분은 수정해주세요!
 
 import androidx.fragment.app.Fragment
